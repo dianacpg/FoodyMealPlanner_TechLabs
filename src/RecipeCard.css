@@ -1,0 +1,110 @@
+#card {
+  height: 350px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+img {
+  width: 150px;
+  border-radius: 25px;
+}
+.slide {
+  position: relative;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  right: 0;
+  width: 150px;
+  height: 200px;
+  box-shadow: 0 6.7px 5.3px rgba(0, 0, 0, 0.048);
+  box-sizing: border-box;
+  border-radius: 25px;
+}
+
+.slide2 {
+  text-align: center;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 20px;
+  transition: 0.8s;
+  transform: translateY(-70%);
+  background-color: #f7f0f5;
+  min-height: 150px;
+  max-height: 150px;
+}
+
+.slide2:hover {
+  transform: translateY(-50%);
+}
+
+p {
+  margin: 0;
+  padding: 2px;
+  text-align: center;
+}
+
+.content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.slide2 h3 {
+  font-family: arial;
+  color: black;
+  font-size: small;
+  margin: 8px;
+}
+
+#btn {
+  background: #9ed896;
+  height: 23px;
+  min-width: 100px;
+  border: none;
+  border-radius: 10px;
+  color: white;
+  font-size: smaller;
+  position: relative;
+  transition: 1s;
+  -webkit-tap-highlight-color: transparent;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  padding-top: 5px;
+  display: flex;
+  align-items: flex-end;
+}
+
+#btn #circle {
+  width: 5px;
+  height: 5px;
+  background: transparent;
+  border-radius: 50%;
+  position: absolute;
+  top: 0;
+  left: 50%;
+  overflow: hidden;
+  transition: 500ms;
+}
+
+.noselect {
+  -webkit-touch-callout: none;
+  -webkit-user-select: none;
+  -khtml-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+}
+
+#btn:hover {
+  background: #6fd08c;
+}
+
+#btn:hover #circle {
+  height: 50px;
+  width: 150px;
+  left: 0;
+  border-radius: 0;
+}

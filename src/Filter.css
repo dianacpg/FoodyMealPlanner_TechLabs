@@ -1,0 +1,20 @@
+form {
+  background-color: white;
+  justify-content: center;
+  text-align: center;
+  font-size: 20px;
+  height: 100px;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
+
+.option {
+  margin: 30px;
+  font-size: small;
+  font-family: arial;
+}
+
+.labelCheckbox {
+  margin-left: 5px;
+}
