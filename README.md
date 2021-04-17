@@ -11,4 +11,5 @@ We created a web app that generates automatically weekly meal plans; - This gene
 _Caution: The free EDAMAM API plan an API calls limit to 10/minute and does not allow to cash data!_
 
 Live Demo: foodymealplanner.netlify.app/
+
 Small presention here: https://www.youtube.com/watch?v=tDLydzgtCKM
