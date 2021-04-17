@@ -9,7 +9,7 @@ const API_KEY = process.env.REACT_APP_EDAMAM_API_KEY;
 
 // We have to display 7 breakfasts, 7 lunches and 7 dinners;
 // We will get the recipes on the edamame API and use it on the state as an array;
-// Problem: We need diversity and not display the array always on the same order; The API doesnt have recipes ID's.
+// Problem: We need diversity and not display the array always on the same order;
 // Possible solution: Get more than 7 meal from the API (ex: 40), Shuffle the array and then create a new array with only 7;
 // ex:          [banana, apple, orange, durian, kiwi, cherry, lemon, melon, pumpkin] -> then Reset ->
 //               [ apple, kiwi, pumpkin, banana, orange, melon, lemon, cherry, durian] -> Splice to 7 meals ->
