@@ -2,11 +2,7 @@
 
 ## NOTE:
 
-<<<<<<< HEAD
-** This is a new version where I uptaded the MealPlanner section following my personal Full Stack DelissBeer Project -> [DelissBeer App](https://github.com/dianacpg/deliss_beer) **
-=======
-This is a new version where I uptaded the mealplanner generator code following my personal Full Stack DelissBeer Project -> [DelissBeer App](https://github.com/dianacpg/deliss_beer)
->>>>>>> 58d41ea4841d86c07bfd66a465ee16902f847964
+**This is a new version where I uptaded the MealPlanner section following my personal Full Stack DelissBeer Project -> [DelissBeer App](https://github.com/dianacpg/deliss_beer)**
 
 ## FoodyMealPlanner
 
