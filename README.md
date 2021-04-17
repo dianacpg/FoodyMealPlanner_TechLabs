@@ -6,7 +6,7 @@
 
 ## FoodyMealPlanner
 
-We created a web app that generates automatically weekly meal plans; - This generator was created by manipulating data from EDAMAM API with millions of recipes; - Users can filter by their type of diet: Standard, Vegetarian or Vegan; - We also display a daily motivational quote;
+We created a react app that generates automatically weekly meal plans; - This generator was created by manipulating data from EDAMAM API with millions of recipes; - Users can filter by their type of diet: Standard, Vegetarian or Vegan; - We also display a daily motivational quote;
 
 _Caution: The free EDAMAM API plan has a limitation of 10 API calss per minute and does not allow to cash data!_
 
