@@ -1,6 +1,5 @@
 import React from "react";
-import Quotes from "./Quotes";
-import "./Quotes.css";
+import Quotes from "./components/Quotes";
 
 const InspirationalQuotes = () => {
   return (

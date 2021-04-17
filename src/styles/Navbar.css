@@ -1,12 +1,12 @@
 .navbar {
+  height: 80px;
   background: white;
   color: black;
-  height: 80px;
+  position: sticky;
   display: flex;
   justify-content: center;
   align-items: center;
   font-size: 1rem;
-  position: sticky;
   top: 0;
   z-index: 999;
   font-weight: 600;
@@ -23,12 +23,6 @@
   cursor: pointer;
   text-decoration: none;
   color: #9ed896;
-}
-
-.fa-typo3 {
-  color: black;
-  margin-left: 0.5rem;
-  font-size: 1.8rem;
 }
 
 .nav-menu {
@@ -74,10 +68,6 @@
 }
 
 @media screen and (max-width: 800px) {
-  .NavbarItems {
-    position: relative;
-  }
-
   .nav-menu {
     display: flex;
     flex-direction: column;

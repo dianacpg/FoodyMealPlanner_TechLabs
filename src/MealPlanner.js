@@ -1,12 +1,11 @@
-import React, { Component } from "react";
+import React, { useState, useEffect } from "react";
 import axios from "axios";
-import CardMeal from "./RecipeCard";
-import "./MealPlanner2.css";
-import Filter from "./Filter";
+import MealList from "./components/MealList";
+import "./styles/MealPlanner.css";
+import Filter from "./components/Filter";
 
 const API_ID = process.env.REACT_APP_EDAMAM_API_ID;
 const API_KEY = process.env.REACT_APP_EDAMAM_API_KEY;
-const URL = "https://api.edamam.com/search?";
 
 // We have to display 7 breakfasts, 7 lunches and 7 dinners;
 // We will get the recipes on the edamame API and use it on the state as an array;
@@ -20,161 +19,69 @@ const URL = "https://api.edamam.com/search?";
 //               3º Get the first 7 recipes from that shuffled array
 // Since we have to display always 7 breakfasts, 7 lunches and 7 dinners I called the API 3 times with the meal types and put the recipes on the State as arrays.
 
-// Function to shuffle arrays
-function shuffleArray(array) {
-  let i = array.length - 1;
-  for (; i > 0; i--) {
-    const j = Math.floor(Math.random() * (i + 1));
-    const temp = array[i];
-    array[i] = array[j];
-    array[j] = temp;
-  }
-  return array;
-}
+const MealPlanner = ({ user }) => {
+  const [breakfast, setBreakfast] = useState("");
+  const [lunch, setLunch] = useState("");
+  const [dinner, setDinner] = useState("");
+  const [diet, setDiet] = useState(""); //by default the diet will be standard
 
-class MealPlan extends Component {
-  //default meal plan
-  constructor() {
-    super();
-    this.state = {
-      breakfast: [],
-      lunch: [],
-      dinner: [],
-      diet: "balanced",
-      mealType: "breakfast",
-      numberMeals: "40",
-    };
-  }
+  const URL = `https://api.edamam.com/search?app_id=${API_ID}&app_key=${API_KEY}q=&health=${diet}&from=0&to=30&`;
 
-  //Fetch API for the 3 types of meals (Breakfast, Lunch, Dinner)
-  componentDidMount() {
+  useEffect(() => {
     axios
-      .get(
-        `${URL}app_id=${API_ID}&app_key=${API_KEY}&q=&diet=${this.state.diet}&mealType=breakfast&from=0&to=${this.state.numberMeals}`
-      )
+      .get(URL + `dishType=main&mealType=breakfast`)
       .then((res) => {
-        console.log(res);
-        this.setState({
-          breakfast: res.data.hits,
-        });
-      });
+        setBreakfast(res.data.hits);
+      })
+      .catch(console.log);
+  }, [diet]);
 
+  useEffect(() => {
     axios
-      .get(
-        `${URL}app_id=${API_ID}&app_key=${API_KEY}&q=&diet=${this.state.diet}&mealType=lunch&from=0&to=${this.state.numberMeals}&dishType=main`
-      )
+      .get(URL + `dishType=main&mealType=lunch`)
       .then((res) => {
-        console.log(res);
-        this.setState({
-          lunch: res.data.hits,
-        });
-      });
+        setLunch(res.data.hits);
+        console.log(diet);
+      })
+      .catch(console.log);
+  }, [diet]);
 
+  useEffect(() => {
     axios
-      .get(
-        `${URL}app_id=${API_ID}&app_key=${API_KEY}&q=&diet=${this.state.diet}&mealType=dinner&from=0&to=${this.state.numberMeals}&dishType=main`
-      )
+      .get(URL + `dishType=main&mealType=dinner`)
       .then((res) => {
-        console.log(res);
-        this.setState({
-          dinner: res.data.hits,
-        });
-      });
-  }
+        setDinner(res.data.hits);
+        console.log(diet);
+      })
+      .catch(console.log);
+  }, [diet]); //it will only render if the user filters the diet type
 
-  //Adding user preferences
-  onHandleRadioButton = (e) => {
-    this.setState({ diet: e.target.value });
+  const onFilterChange = (e) => {
+    setDiet(e.target.value);
   };
 
-  //displaying recipes per type of meal
-  render() {
-    const { breakfast, lunch, dinner, days } = this.state;
+  return (
+    <div className="plan_container">
+      <Filter //Added a filter option for standard, vegetarian and vegan
+        onFilterChange={onFilterChange}
+      />
 
-    const shuffleBreakfastList = shuffleArray(breakfast); //Since we are display the recipe array elements, i shuffled the array to not show always the same order
-    const weeklyBreakfastNumber = shuffleBreakfastList.slice(0, 7); // I asked for 40 recipes and I only want to display 7
-    const BreakfastCardList = breakfast.length ? ( // create a recipe card for each recipe
-      weeklyBreakfastNumber.map((recipe) => {
-        return (
-          <CardMeal
-            image={recipe.recipe.image}
-            name={recipe.recipe.label}
-            link={recipe.recipe.url}
-            ingredients={recipe.recipe.ingredientLines}
-          />
-        );
-      })
-    ) : (
-      <div>
-        {" "}
-        <p>Meals are cooking...</p>{" "}
+      <h2>Breakfast</h2>
+      <div id="breakfast">
+        {/* Recipes will be displayed by the MealList component, passing breakfast,lunch and dinner arrays as props */}
+        {/* Conditional Rendering.Only output MealList when we have a value for breakfast. */}
+        <MealList props={breakfast} user={user} />
       </div>
-    );
-
-    const shuffleLunchList = shuffleArray(lunch); //Since we are display the recipe array elements, i shuffled the array to not show always the same order
-    const weeklyLunchNumber = shuffleLunchList.slice(0, 7); // I asked for 40 recipes and I only want to display 7
-    const LunchCardList = lunch.length ? ( // create a recipe card for each recipe
-      weeklyLunchNumber.map((recipe) => {
-        return (
-          <CardMeal
-            image={recipe.recipe.image}
-            name={recipe.recipe.label}
-            link={recipe.recipe.url}
-            ingredients={recipe.recipe.ingredientLines}
-          />
-        );
-      })
-    ) : (
-      <div>
-        {" "}
-        <p>Meals are cooking...</p>{" "}
+      <h2>Lunch</h2>
+      <div id="lunch">
+        <MealList props={lunch} user={user} />
       </div>
-    );
-
-    const shuffleDinnerList = shuffleArray(dinner); //Since we are display the recipe array elements, i shuffled the array to not show always the same order
-    const weeklyDinnerNumber = shuffleDinnerList.slice(0, 7); // I asked for 40 recipes and I only want to display 7
-    const DinnerCardList = dinner.length ? ( //   // create a recipe card for each recipe
-      weeklyDinnerNumber.map((recipe) => {
-        return (
-          <CardMeal
-            image={recipe.recipe.image}
-            name={recipe.recipe.label}
-            link={recipe.recipe.url}
-            ingredients={recipe.recipe.ingredientLines}
-          />
-        );
-      })
-    ) : (
-      <div>
-        {" "}
-        <p>Meals are cooking...</p>{" "}
+      <h2>Dinner</h2>
+      <div id="dinner">
+        <MealList props={dinner} user={user} />
       </div>
-    );
+    </div>
+  );
+};
 
-    return (
-      <div>
-        <h1>Meal Planner Happiness</h1>
-        <Filter handleChange={this.onHandleRadioButton} />
-        <div id="container">
-          <div className="mealtypes">
-            {" "}
-            <h2> </h2>
-          </div>
-          <div className="plan_container">
-            <div className="days"></div>
-            <div className="meals">
-              <h2>Breakfast</h2>
-              <div id="breakfast">{BreakfastCardList}</div>
-              <h2>Lunch</h2>
-              <div id="lunch">{LunchCardList}</div>
-              <h2>Dinner</h2>
-              <div id="dinner">{DinnerCardList}</div>
-            </div>
-          </div>
-        </div>
-      </div>
-    );
-  }
-}
-
-export default MealPlan;
+export default MealPlanner;

@@ -1,6 +1,5 @@
 import React from "react";
-import { Form } from "react-bootstrap";
-import "./Filter.css";
+import "../styles/Filter.css";
 
 const Filter = ({ handleChange }) => {
   return (

@@ -58,23 +58,20 @@ p {
 }
 
 #btn {
-  background: #9ed896;
   height: 23px;
   min-width: 100px;
-  border: none;
-  border-radius: 10px;
-  color: white;
-  font-size: smaller;
-  position: relative;
-  transition: 1s;
-  -webkit-tap-highlight-color: transparent;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  cursor: pointer;
   padding-top: 5px;
   display: flex;
   align-items: flex-end;
+  justify-content: center;
+  border: none;
+  border-radius: 10px;
+  background: #9ed896;
+  color: white;
+  font-size: smaller;
+  transition: 1s;
+  -webkit-tap-highlight-color: transparent;
+  cursor: pointer;
 }
 
 #btn #circle {

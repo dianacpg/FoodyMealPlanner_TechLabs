@@ -1,5 +1,4 @@
-import { Card, Button } from "react-bootstrap";
-import "./RecipeCard.css";
+import "../styles/RecipeCard.css";
 
 const CardMeal = ({ image, name, link }) => {
   return (

@@ -1,7 +1,7 @@
 import React from "react";
 import { Card, Button } from "react-bootstrap";
 import { Link } from "react-router-dom";
-import "./Home.css";
+import "./styles/Home.css";
 
 const Home = () => {
   return (
